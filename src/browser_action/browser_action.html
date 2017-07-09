@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>Custom Scripts</title>
+  <link href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" type="text/css" href="./../../css/styles.css">
+  <link href="https://cdn.iconmonstr.com/1.2.0/css/iconmonstr-iconic-font.min.css" media="all" rel="stylesheet" type="text/css" />
+  <link href="./../../css/bootstrap.min.css" rel="stylesheet">
+  <script src="./../../js/angular.min.js"></script>
+</head>
+
+<body ng-app="customScriptsApp">
+  <div ng-controller="mainCtrl" class="list container">
+    <div class="add">
+      <a href="" ng-click="addScript()"><h5 class="faded-blue">+ Add Custom Script</h5></a>
+      <span class="glyphicon glyphicon-floppy-disk button faded-blue" ng-click="saveScript(scripts); editing = false;" title="save"></span>
+    </div>
+    <ul class="list-group">
+      <li ng-repeat="script in scripts track by $index" class="list-group-item" >
+        <div class="item row">
+          <div class="mrgn-lr line-height6">
+            <i class="im im-play button-green mrgn-right" ng-hide="editing" ng-click="runCommand(script.code)"></i>
+            <label ng-show="editing" class="mrgn-top">Name:</label>
+            <label ng-hide="editing" class="name" ng-click="editing =! editing" ng-class="{'edited': script.edited}">{{script.name}}</label>
+            <span class="actions" ng-class="{'editing' : editing}">
+              <i ng-click="editing =! editing" class="glyphicon glyphicon-pencil sm-font button faded-blue" title="edit"></i>
+              <span class="glyphicon glyphicon-floppy-disk button faded-blue" ng-show="script.edited" ng-click="script.edited = false; saveScript(scripts); editing = false;" title="save"></span>
+              <i class="im im-x-mark sm-font button faded-red" ng-click="deleteScript(script, $index)" title="delete"></i>
+            </span>
+            <input ng-show="editing" ng-change="script.edited = true" ng-model="script.name" ng-class="{'editing-label' : editing}" type="text" class="form-control"></input>
+            <label ng-show="editing" class="mrgn-top">Code:</label>
+            <textarea ng-model="script.code" ng-show="editing" ng-change="script.edited = true" class="code form-control" ng-class="{'editing-label' : editing}"></textarea>
+            <label ng-show="editing" class="mrgn-top">Url:</label>
+            <input ng-model="script.url" ng-show="editing" ng-change="script.edited = true" class="form-control" ng-class="{'editing-label' : editing}" type="text"></input>
+          </div>
+        </div>
+      </li>
+    </div>
+  </div>
+
+  <script src="./../../js/jquery/jquery.min.js"></script>
+  <script src="./../../js/bootstrap.min.js"></script>
+  <script src="./../../js/app.js"></script>
+  <script src="./../../js/scripts.js"></script>
+  <script src="./../../js/controllers/main.js"></script>
+  <script src="./../../js/services/data.js"></script>
+</body>
+
+</html>

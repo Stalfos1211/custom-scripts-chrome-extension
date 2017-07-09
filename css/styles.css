@@ -1,0 +1,55 @@
+
+/* Utilities */
+.button-green { color: #71cc71; font-size: 14px !important; cursor: pointer; }
+.button-green:hover {color: #4ce052; }
+.button-green:active {color: #317734; }
+
+.button { cursor: pointer; }
+.sm-font { font-size: 14px !important; }
+
+.faded-blue { color: #3f8abf;}
+.faded-red { color: #bf3f3f;}
+
+.bg-grey { background-color: grey; }
+.bg-aqua { background-color: aqua; }
+
+.mrgn-lr {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.mrgn-right { margin-right: 10px; }
+.mrgn-top { margin-top: 8px; }
+
+.line-height6 { line-height: 6px; }
+
+/* /Utilities */
+
+body {
+  width: 400px;
+}
+
+label {
+  width: 50% !important;
+}
+
+.actions {
+  float: right;
+}
+
+.edited:after {
+  content: " edited";
+  text-transform: uppercase;
+  color: #a7b9c4;
+  font-size: 14px;
+  padding-left: 5px;
+}
+
+.name {
+  width: 25%;
+}
+
+.code {
+  font-family: monospace !important;
+  font-size: 12px !important;
+  height: 150px !important;
+}
