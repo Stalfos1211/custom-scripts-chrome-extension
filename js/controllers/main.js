@@ -1,10 +1,19 @@
 
 customScriptsApp.controller("mainCtrl", ($scope, dataService) => {
     
-    dataService.getScripts(response => {
+    dataService.getScripts((response, autoRunScripts) => {
       if (response) {
         $scope.scripts = response;
         $scope.$apply();
+      }
+
+      // Auto run scripts
+      if (autoRunScripts.length > 0) {
+        for (let i = 0; i < autoRunScripts.length; i++) {
+          chrome.tabs.executeScript({
+            code: autoRunScripts[i]
+          });
+        }
       }
     });
 

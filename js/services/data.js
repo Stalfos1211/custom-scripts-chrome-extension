@@ -17,12 +17,12 @@ customScriptsApp.service("dataService", function($http) {
           let scriptsList = result.scripts;
           for (let i = 0; i < scriptsList.length; i++) {
             if (scriptsList[i].url) {
-              autoRunScripts.push(scriptsList[i]);
+              autoRunScripts.push(scriptsList[i].code);
             }
           }
           console.log('autoRunScripts: ',autoRunScripts)
 
-          callback(result.scripts);
+          callback(result.scripts, autoRunScripts);
         }
         else {
           /*console.log('loading default')
