@@ -6,15 +6,6 @@ customScriptsApp.controller("mainCtrl", ($scope, dataService) => {
         $scope.scripts = response;
         $scope.$apply();
       }
-
-      // Auto run scripts
-      if (autoRunScripts.length > 0) {
-        for (let i = 0; i < autoRunScripts.length; i++) {
-          chrome.tabs.executeScript({
-            code: autoRunScripts[i]
-          });
-        }
-      }
     });
 
     $scope.addScript = () => {
@@ -36,19 +27,9 @@ customScriptsApp.controller("mainCtrl", ($scope, dataService) => {
     }
     
     $scope.saveScript = (script) => {
-      //dataService.saveScript(script)
-      console.log('Saving:', script)
       dataService.saveScript($scope.scripts, script, (response) => {
         $scope.scripts = response;
       })
-
-      // List scripts with url to determine which ones to auto-run
-      /*let savedScripts = $scope.scripts;
-      for (let i = 0; i < savedScripts.length; i++) {
-        if (savedScripts[i].url) {
-          scriptsWithUrl.push(savedScripts[i])
-        }
-      }*/
     }
 
     $scope.runCommand = (code) => {
@@ -56,11 +37,5 @@ customScriptsApp.controller("mainCtrl", ($scope, dataService) => {
         code: code
       });
     }
-
-    /*chrome.storage.onChanged.addListener(function() {
-      dataService.getScripts(response => {
-        $scope.scripts = response;
-      });
-    })*/
 
   })

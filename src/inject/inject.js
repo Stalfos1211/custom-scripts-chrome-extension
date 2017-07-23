@@ -1,52 +1,44 @@
 chrome.extension.sendMessage({}, function(response) {
-	let readyStateCheckInterval = setInterval(function() {
-		//runAutoScripts();
-	if (document.readyState === "complete") {
-		clearInterval(readyStateCheckInterval);
+  let readyStateCheckInterval = setInterval(function() {
+    //runAutoScripts();
+    if (document.readyState === "complete") {
+      clearInterval(readyStateCheckInterval);
 
-		// ----------------------------------------------------------
-		// This part of the script triggers when page is done loading
-		//console.log("Hello. This message was sent from scripts/inject.js");
-		// ----------------------------------------------------------
-
-		getAutoScripts();
-
-	}
-	}, 10);
+      getAutoScripts();
+    }
+  }, 10);
 });
 
-function runAutoScripts (scripts) {
-	
-	for (script in scripts) {
-		let url = scripts[script].url;
-		let code = scripts[script].code;
+function runAutoScripts(scripts) {
+  for (script in scripts) {
+    let url = scripts[script].url;
+    let code = scripts[script].code;
 
-		if (location.href.indexOf(url) > -1) {		
-			eval(code);
-		}
-	}
-
+    if (location.href.indexOf(url) > -1) {
+      eval(code);
+    }
+  }
 }
 
-function getAutoScripts () {
+function getAutoScripts() {
+  let autoRunScripts = [];
 
-	let autoRunScripts = [];
+  new Promise(resolve => {
+    // Retrieve codes that needs to be auto ran
+    chrome.storage.local.get("scripts", result => {
+      let scripts = result.scripts;
 
-	new Promise((resolve) => {
-
-		// Retrieve codes that needs to be auto ran
-		chrome.storage.local.get("scripts", (result) => {
-					let scripts = result.scripts;
-
-					// Get auto run codes and push them into autoRunScripts array formatted {url: 'http', code: '//code'}
-					for (script in scripts) {
-						if (scripts[script].url) {
-							autoRunScripts.push({'url': scripts[script].url, 'code': scripts[script].code})
-						}
-					}
-					resolve(runAutoScripts(autoRunScripts));
-		})
-	}) 
-
+      // Get auto run codes and push them into autoRunScripts array formatted {url: 'http', code: '//code'}
+      for (script in scripts) {
+        if (scripts[script].url) {
+          autoRunScripts.push({
+            url: scripts[script].url,
+            code: scripts[script].code
+          });
+        }
+      }
+      resolve(runAutoScripts(autoRunScripts));
+    });
+  });
 }
 // http://unbill.us/assets/images/subpage-bg-q2.jpg
