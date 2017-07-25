@@ -19,11 +19,7 @@ customScriptsApp.controller("mainCtrl", ($scope, dataService) => {
     };
 
     $scope.deleteScript = (script, $index) => {
-      dataService.deleteScript(script)
       $scope.scripts.splice($index, 1);
-      dataService.saveScript($scope.scripts, (response) => {
-        $scope.scripts = response;
-      })
     }
     
     $scope.saveScript = (script) => {

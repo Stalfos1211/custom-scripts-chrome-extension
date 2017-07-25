@@ -39,21 +39,7 @@ customScriptsApp.service("dataService", function($http) {
         }
       })
 
-      /*getAutoRunScripts().then((res) => {
-        console.log(res);
-      });*/
-
     };
-
-    /*this.deleteScript = (script, callback) => {
-      console.log(`The ${script} has been deleted`)
-      chrome.storage.local.set({'scripts': scripts}, ()=> {
-        getStoredScripts().then((res) => {
-          console.log('updated scripts:', res.scripts)
-          callback(res.scripts)
-        })
-      });
-    };*/
 
     this.saveScript = (scripts, script, callback) => {
       
@@ -63,13 +49,6 @@ customScriptsApp.service("dataService", function($http) {
         })
       });
 
-      //saveScriptsToStorage(script, callback);
-      //console.log(`The ${script} has been saved`)
-      //chrome.storage.local.set({'scripts': {"testing": "this is just a test"}});
-      /*chrome.storage.local.get("scripts", (result) => {
-        console.log(result)
-      })*/
-      //console.log('Storage:', chrome.storage.local.set({"test": 'This is the test value'},() => {console.log('message set, I think')}));
     }
   });
 
